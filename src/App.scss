@@ -16,6 +16,7 @@ $gradient2: 135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%);
 $gradient1: 135deg, hsl(0, 0%, 100%), hsl(0, 100%, 98%);
 
 $mobile-width: 375px;
+$mobile-breakpoint: 34.375rem;
 $desktop-width: 1440px;
 
 /* reset */
@@ -26,6 +27,7 @@ $desktop-width: 1440px;
   border: 0;
   font-weight: normal;
   font-size: 100%;
+  box-sizing: border-box;
 }
 
 /* setup */
@@ -46,13 +48,18 @@ body {
   margin: 0 auto;
 }
 
+@media (min-width: $mobile-breakpoint) {
+  .App {
+    max-width: $desktop-width;
+  }
+}
+
 .navbar {
   padding: 1.5rem 0;
-  // background: linear-gradient($gradient1);
+  background: linear-gradient($gradient1);
 
   img {
     height: 1.35rem;
-    margin: 0 1.5rem;
     vertical-align: middle;
   }
 }
@@ -122,5 +129,44 @@ main {
 
   .hero-image-desktop {
     display: none;
+  }
+}
+
+@media (min-width: $mobile-breakpoint) {
+  .container {
+    min-width: 60%;
+    padding: 0 5rem;
+    margin: 2rem 1.5rem;
+  }
+
+  .navbar {
+    background: none;
+  }
+
+  main {
+    background: none;
+    display: grid;
+    // height: 100vh;
+    grid-template-areas:
+      "navbar hero-image-desktop"
+      "hero hero-image-desktop";
+
+    .navbar {
+      grid-area: navbar;
+    }
+
+    .hero {
+      grid-area: hero;
+      max-width: 80%;
+    }
+
+    .hero-image-mobile {
+      display: none;
+    }
+
+    .hero-image-desktop {
+      grid-area: hero-image-desktop;
+      display: inherit;
+    }
   }
 }
